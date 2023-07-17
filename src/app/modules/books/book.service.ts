@@ -32,7 +32,7 @@ const getBooks = async (
   filters: IBookFilter,
   paginationOptions: paginationOption
 ): Promise<IGenericResponse<IBooks[]>> => {
-  const { searchTerm } = filters;
+  const { searchTerm, ...filtersData } = filters;
   const BookSearchableField = ["title", "author", "genre", "publicationDate"];
   const andConditions = [];
   if (searchTerm) {
@@ -46,6 +46,13 @@ const getBooks = async (
     });
   }
 
+  if (Object.keys(filtersData).length) {
+    andConditions.push({
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: value,
+      })),
+    });
+  }
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelpers.calculatePagination(paginationOptions);
 
@@ -54,7 +61,10 @@ const getBooks = async (
   if (sortBy && sortOrder) {
     sortConditions[sortBy] = sortOrder;
   }
-  const result = await Book.find({ $and: andConditions })
+
+  const whereConditions =
+    andConditions.length > 0 ? { $and: andConditions } : {};
+  const result = await Book.find(whereConditions)
     .sort(sortConditions)
     .skip(skip)
     .limit(limit);

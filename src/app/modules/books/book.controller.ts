@@ -21,7 +21,7 @@ const createBook = async (req: Request, res: Response) => {
 };
 
 const getAllBook = async (req: Request, res: Response) => {
-  const filters = pick(req.query, ["searchTerm"]);
+  const filters = pick(req.query, ["searchTerm", "title", "author", "genre"]);
   const paginationOptions = pick(req.query, [
     "page",
     "limit",
