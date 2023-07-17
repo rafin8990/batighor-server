@@ -11,6 +11,11 @@ const createBook = async (book: IBooks): Promise<IBooks | null> => {
   return createBook;
 };
 
+const getSingleBook = async (id: string): Promise<IBooks | null> => {
+  const result = await Book.findById(id);
+  return result;
+};
+
 type paginationOption = {
   page?: number;
   limit?: number;
@@ -64,6 +69,7 @@ const getBooks = async (
 
   const whereConditions =
     andConditions.length > 0 ? { $and: andConditions } : {};
+
   const result = await Book.find(whereConditions)
     .sort(sortConditions)
     .skip(skip)
@@ -80,7 +86,25 @@ const getBooks = async (
   };
 };
 
+const updateBook = async (
+  id: string,
+  payload: Partial<IBooks>
+): Promise<IBooks | null> => {
+  const result = await Book.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
+  return result;
+};
+
+const deleteBook = async (id: string): Promise<IBooks | null> => {
+  const result = await Book.findByIdAndDelete(id);
+  return result;
+};
+
 export const BookService = {
   createBook,
   getBooks,
+  getSingleBook,
+  updateBook,
+  deleteBook,
 };
