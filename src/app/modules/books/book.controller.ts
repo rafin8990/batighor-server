@@ -19,6 +19,17 @@ const createBook = async (req: Request, res: Response) => {
     });
   }
 };
+const addComment = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const review = req.body;
+  console.log(review);
+  const result = await BookService.addComment(id, review);
+  res.status(200).json({
+    success: true,
+    message: "Review Added SuccessFully",
+    data: result,
+  });
+};
 
 const getAllBook = async (req: Request, res: Response) => {
   const filters = pick(req.query, ["searchTerm", "title", "author", "genre"]);
@@ -74,4 +85,5 @@ export const BookController = {
   getSingleBook,
   updateBooks,
   deleteBook,
+  addComment,
 };

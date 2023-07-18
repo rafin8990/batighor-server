@@ -1,6 +1,6 @@
 import { SortOrder } from "mongoose";
 import { paginationHelpers } from "../../helper/paginationHelper";
-import { IBooks } from "./book.interface";
+import { IBooks, IComment } from "./book.interface";
 import { Book } from "./book.model";
 
 const createBook = async (book: IBooks): Promise<IBooks | null> => {
@@ -9,6 +9,15 @@ const createBook = async (book: IBooks): Promise<IBooks | null> => {
     throw new Error("Failed to add books");
   }
   return createBook;
+};
+const addComment = async (id: string, payload: IComment) => {
+  const result = await Book.findById(id);
+  console.log(result);
+
+  console.log(payload);
+  result?.review.push(payload);
+  // console.log(result);
+  await result.save();
 };
 
 const getSingleBook = async (id: string): Promise<IBooks | null> => {
@@ -107,4 +116,5 @@ export const BookService = {
   getSingleBook,
   updateBook,
   deleteBook,
+  addComment,
 };

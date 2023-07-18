@@ -20,7 +20,7 @@ const bookSchema = new Schema<IBooks>(
       required: true,
     },
     publicationDate: {
-      type: String,
+      type: Number,
       required: true,
     },
     email: {
@@ -43,6 +43,15 @@ const bookSchema = new Schema<IBooks>(
       type: Boolean,
       required: true,
     },
+    review: [
+      {
+        email: { type: String, required: true },
+        review: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
   },
   {
     timestamps: true,
