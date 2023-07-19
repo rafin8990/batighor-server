@@ -20,7 +20,7 @@ const bookSchema = new Schema<IBooks>(
       required: true,
     },
     publicationDate: {
-      type: Number,
+      type: String,
       required: true,
     },
     email: {

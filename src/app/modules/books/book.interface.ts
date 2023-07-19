@@ -7,7 +7,7 @@ export type IBooks = {
   imageUrl: string;
   author: string;
   genre: string;
-  publicationDate: number;
+  publicationDate: string;
   email: string;
   time: string;
   wishlist: boolean;

@@ -25,6 +25,10 @@ const getSingleBook = async (id: string): Promise<IBooks | null> => {
   return result;
 };
 
+const getCommnet = async (id: string): Promise<IBooks | null> => {
+  const result = await Book.findById({ _id: id }, { review: 1 });
+  return result;
+};
 type paginationOption = {
   page?: number;
   limit?: number;
@@ -117,4 +121,5 @@ export const BookService = {
   updateBook,
   deleteBook,
   addComment,
+  getCommnet,
 };

@@ -7,6 +7,7 @@ router.post("/create-book", BookController.createBook);
 router.post("/addComment/:id", BookController.addComment);
 router.get("/get-book", BookController.getAllBook);
 router.get("/getSingle-book/:id", BookController.getSingleBook);
+router.get("/getComment/:id", BookController.getComment);
 router.patch("/updateBook/:id", BookController.updateBooks);
 router.delete("/deleteBook/:id", BookController.deleteBook);
 

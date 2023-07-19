@@ -57,6 +57,16 @@ const getSingleBook = async (req: Request, res: Response) => {
     data: result,
   });
 };
+
+const getComment = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const result = await BookService.getCommnet(id);
+  res.status(200).json({
+    success: true,
+    message: "Book Retrieved SuccessFully",
+    data: result,
+  });
+};
 const updateBooks = async (req: Request, res: Response) => {
   const id = req.params.id;
   const updatedData = req.body;
@@ -86,4 +96,5 @@ export const BookController = {
   updateBooks,
   deleteBook,
   addComment,
+  getComment,
 };
