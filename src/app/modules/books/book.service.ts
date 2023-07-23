@@ -46,6 +46,7 @@ type IGenericResponse<T> = {
 };
 
 type IBookFilter = { searchTerm: string };
+
 const getBooks = async (
   filters: IBookFilter,
   paginationOptions: paginationOption

@@ -20,6 +20,7 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import bookRoute from "./app/modules/books/book.routes";
+import wishlistRoute from "./app/modules/wishlist/wishlist.routes";
 
 const app: Application = express();
 
@@ -33,6 +34,7 @@ app.use(
 );
 
 app.use("/api/v1/books", bookRoute);
+app.use("/api/v1/wishlist", wishlistRoute);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Working successfully");
